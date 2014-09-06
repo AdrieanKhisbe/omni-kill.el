@@ -5,7 +5,7 @@
 ;; Author: Adrien Becchis <adriean.khisbe@live.fr>
 ;; Created:  2014-09-06
 ;; Version: 0.1
-;; Keywords: convenience, languages, tools
+;; Keywords: convenience, editing, tools
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -29,6 +29,9 @@
 
 (require 'thingatpt)
 
+(defgroup omni-kill nil
+    "Commands to kill/delete/copy/younameit all the things at point."
+    :group 'editing)
 
 (defcustom omni-kill-thing-list
   '(symbol list sexp defun filename url email word sentence whitespace line number page )
@@ -82,7 +85,6 @@ Returns the value grabed, otherwise nil."
 	     nil))))
 
 ;; §later:  make it in the clipboard.
-
 ;; §see: clipboard function: clipboard-yank, etc!!!!!
 ;; §see: xsel
 

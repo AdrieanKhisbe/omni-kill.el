@@ -83,6 +83,23 @@ Returns the value grabed, otherwise nil."
 ;; ¤> functions
 ;; §then: macro generate all the functions!
 
+(defmacro ok:generate-all-the-fun(thing)
+  `(progn
+     (defun ,(intern (format "omni-copy-%s" (eval thing))) ()
+       ,(message "Copy the %s at point" thing)
+       (interactive)
+       (ok:copy-thing-at-point ,thing))
+
+;; §later: do deleter and kill
+;; (defun delete-url()
+;;   (ok:delete-thing-at-point 'url))
+
+;; (defun kill-url()
+;;   (ok:kill-thing-at-point 'url)))
+
+     ;; §name: maybe copy-this-THING rather than omny-copy?
+    ))
+
 
 
 (defun copy-url()

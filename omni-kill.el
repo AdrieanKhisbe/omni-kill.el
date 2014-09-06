@@ -80,28 +80,36 @@ Returns the value grabed, otherwise nil."
 
 
 ;; §later: store-thing..
-;; ¤> functions
-;; §then: macro generate all the functions!
 
-(defmacro ok:generate-all-the-fun (thing)
- (let ((symb (eval thing)))
-  `(progn
-     (defun ,(intern (format "omni-copy-%s" symb)) ()
-       (interactive)
-       ,(format "Copy the %s at point"  symb)
-       (ok:copy-thing-at-point ',symb))
 
-     (defun ,(intern (format "omni-delete-%s" symb)) ()
-       (interactive)
-       ,(format "Delete the %s at point"  symb)
-       (ok:delete-thing-at-point ',symb))
-
-     (defun ,(intern (format "omni-kill-%s" symb)) ()
-       (interactive)
-       ,(format "Kill the %s at point"  symb)
-       (ok:kill-thing-at-point ',symb))
-    )))
+;;; ¤> Function generators
+(defun ok:generate-all-the-fun (thing)
+  "Generate all the functions associated with the given THING"
+  (ok:generate-copy-command thing)
+  (ok:generate-delete-command thing)
+  (ok:generate-kill-command thing))
 ;; §name: maybe copy-this-THING rather than omny-copy? [user choice?]
+
+(defmacro ok:generate-copy-command (symb)
+  "Generate a copy command for the given SYMB."
+ `(defun ,(intern (format "omni-copy-%s" (eval symb))) ()
+       ,(format "Copy the %s at point" (eval symb))
+       (interactive)
+       (ok:copy-thing-at-point ',(eval symb))))
+
+(defmacro ok:generate-delete-command (symb)
+  "Generate a delete command for the given SYMB."
+  `(defun ,(intern (format "omni-delete-%s" (eval symb))) ()
+       ,(format "Delete the %s at point"  (eval symb))
+       (interactive)
+       (ok:delete-thing-at-point ',(eval symb))))
+
+(defmacro ok:generate-kill-command ( symb)
+  "Generate a kill command for the given SYMB."
+  `(defun ,(intern (format "omni-kill-%s" (eval symb))) ()
+     ,(format "Kill the %s at point"  (eval symb))
+     (interactive)
+     (ok:kill-thing-at-point ',(eval symb))))
 
 (defun ok:get-all-the-things()
   "Generate all the omni functions for the list of things."
@@ -131,3 +139,7 @@ Returns the value grabed, otherwise nil."
 
 (provide 'omni-kill)
 ;;; omni-kill.el ends here
+; Debugger entered--Lisp error: (wrong-number-of-arguments
+
+;(lambda (thing) (let ((symb (if (symbolp thing) thing (eval thing))))
+; (list (quote progn) (list (quote defun) (intern (format "omni-copy-%s" symb)) nil (format "Copy the %s at point" symb) (quote (interactive)) (list (quote ok:copy-thing-at-point) (list (quote quote) symb))) (list (quote defun) (intern (format "omni-delete-%s" symb)) nil (format "Delete the %s at point" symb) (quote (interactive)) (list (quote ok:delete-thing-at-point) (list (quote quote) symb))) (list (quote defun) (intern (format "omni-kill-%s" symb)) nil (format "Kill the %s at point" symb) (quote (interactive)) (list (quote ok:kill-thing-at-point) (list (quote quote) symb)))))) 0)

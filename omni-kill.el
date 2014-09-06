@@ -88,22 +88,26 @@ Returns the value grabed, otherwise nil."
   `(progn
      (defun ,(intern (format "omni-copy-%s" symb)) ()
        (interactive)
-       (message "Copy the %s at point" ',symb)
+       ,(format "Copy the %s at point"  symb)
        (ok:copy-thing-at-point ',symb))
 
-;; §later: do deleter and kill
-;; (defun delete-url()
-;;   (ok:delete-thing-at-point 'url))
+     (defun ,(intern (format "omni-delete-%s" symb)) ()
+       (interactive)
+       ,(format "Delete the %s at point"  symb)
+       (ok:delete-thing-at-point ',symb))
 
-;; (defun kill-url()
-;;   (ok:kill-thing-at-point 'url)))
-
-     ;; §name: maybe copy-this-THING rather than omny-copy?
+     (defun ,(intern (format "omni-kill-%s" symb)) ()
+       (interactive)
+       ,(format "Kill the %s at point"  symb)
+       (ok:kill-thing-at-point ',symb))
     )))
+;; §name: maybe copy-this-THING rather than omny-copy? [user choice?]
 
 (defun ok:get-all-the-things()
   "Generate all the omni functions for the list of things."
-  (mapc (lambda (s) (ok:generate-all-the-fun s))
+  ;; §tofix: eager macro expansion failure
+  ;; §wtf: does not happ when manually load.
+  (mapc (lambda (arg) (ok:generate-all-the-fun arg))
 	'(url line sentence)))
 ;; §maybe user custom for list?
 

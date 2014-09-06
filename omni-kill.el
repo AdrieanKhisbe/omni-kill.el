@@ -39,6 +39,15 @@
   :type '(repeat symbol)
   :group 'omni-kill)
 
+(defcustom omni-kill-naming-scheme
+  "omni-%s-%s"
+  "Naming pattern of generated patters.
+The first placeholder correspond to the action, the second to the thing.
+
+Changing this would only have effect at next startup."
+  :type 'string ; §check (function  )
+  :group 'omni-kill)
+
 
 ;; ¤> thing at point wrappers
 ;; §todo: select thing at pt
@@ -120,28 +129,28 @@ Returns the value grabed, otherwise nil."
 ;; §maybe: macro generate the macro... ^^
 (defmacro ok:generate-copy-command (symb)
   "Generate a copy command for the given SYMB."
- `(defun ,(intern (format "omni-copy-%s" (eval symb))) ()
+ `(defun ,(intern (format omni-kill-naming-scheme "copy" (eval symb))) ()
        ,(format "Copy the %s at point" (eval symb))
        (interactive)
        (ok:copy-thing-at-point ',(eval symb))))
 
 (defmacro ok:generate-delete-command (symb)
   "Generate a delete command for the given SYMB."
-  `(defun ,(intern (format "omni-delete-%s" (eval symb))) ()
+  `(defun ,(intern (format omni-kill-naming-scheme "delete" (eval symb))) ()
        ,(format "Delete the %s at point"  (eval symb))
        (interactive)
        (ok:delete-thing-at-point ',(eval symb))))
 
 (defmacro ok:generate-kill-command ( symb)
   "Generate a kill command for the given SYMB."
-  `(defun ,(intern (format "omni-kill-%s" (eval symb))) ()
+  `(defun ,(intern (format omni-kill-naming-scheme "kill" (eval symb))) ()
      ,(format "Kill the %s at point"  (eval symb))
      (interactive)
      (ok:kill-thing-at-point ',(eval symb))))
 
 (defmacro ok:generate-select-command ( symb)
   "Generate a select command for the given SYMB."
-  `(defun ,(intern (format "omni-select-%s" (eval symb))) ()
+  `(defun ,(intern (format omni-kill-naming-scheme "select" (eval symb))) ()
      ,(format "Select the %s at point"  (eval symb))
      (interactive)
      (ok:select-thing-at-point ',(eval symb))))

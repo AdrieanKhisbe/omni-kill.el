@@ -29,6 +29,14 @@
 
 (require 'thingatpt)
 
+
+(defcustom omni-kill-thing-list
+  '(symbol list sexp defun filename url email word sentence whitespace line number page )
+  "List of THING symbols for which omni kill will create a fonction"
+  :type '(repeat symbol)
+  :group 'omni-kill)
+
+
 ;; ¤> thing at point wrappers
 ;; §todo: select thing at pt
 
@@ -116,7 +124,7 @@ Returns the value grabed, otherwise nil."
   ;; §tofix: eager macro expansion failure
   ;; §wtf: does not happ when manually load.
   (mapc (lambda (arg) (ok:generate-all-the-fun arg))
-	'(url line sentence)))
+	omni-kill-thing-list))
 ;; §maybe user custom for list?
 
 
@@ -139,7 +147,3 @@ Returns the value grabed, otherwise nil."
 
 (provide 'omni-kill)
 ;;; omni-kill.el ends here
-; Debugger entered--Lisp error: (wrong-number-of-arguments
-
-;(lambda (thing) (let ((symb (if (symbolp thing) thing (eval thing))))
-; (list (quote progn) (list (quote defun) (intern (format "omni-copy-%s" symb)) nil (format "Copy the %s at point" symb) (quote (interactive)) (list (quote ok:copy-thing-at-point) (list (quote quote) symb))) (list (quote defun) (intern (format "omni-delete-%s" symb)) nil (format "Delete the %s at point" symb) (quote (interactive)) (list (quote ok:delete-thing-at-point) (list (quote quote) symb))) (list (quote defun) (intern (format "omni-kill-%s" symb)) nil (format "Kill the %s at point" symb) (quote (interactive)) (list (quote ok:kill-thing-at-point) (list (quote quote) symb)))))) 0)

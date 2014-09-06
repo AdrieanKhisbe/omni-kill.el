@@ -83,12 +83,13 @@ Returns the value grabed, otherwise nil."
 ;; ¤> functions
 ;; §then: macro generate all the functions!
 
-(defmacro ok:generate-all-the-fun(thing)
+(defmacro ok:generate-all-the-fun (thing)
+ (let ((symb (eval thing)))
   `(progn
-     (defun ,(intern (format "omni-copy-%s" (eval thing))) ()
-       ,(message "Copy the %s at point" thing)
+     (defun ,(intern (format "omni-copy-%s" symb)) ()
        (interactive)
-       (ok:copy-thing-at-point ,thing))
+       (message "Copy the %s at point" ',symb)
+       (ok:copy-thing-at-point ',symb))
 
 ;; §later: do deleter and kill
 ;; (defun delete-url()
@@ -98,8 +99,13 @@ Returns the value grabed, otherwise nil."
 ;;   (ok:kill-thing-at-point 'url)))
 
      ;; §name: maybe copy-this-THING rather than omny-copy?
-    ))
+    )))
 
+(defun ok:get-all-the-things()
+  "Generate all the omni functions for the list of things."
+  (mapc (lambda (s) (ok:generate-all-the-fun s))
+	'(url line sentence)))
+;; §maybe user custom for list?
 
 
 (defun copy-url()

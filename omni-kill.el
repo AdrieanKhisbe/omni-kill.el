@@ -68,6 +68,21 @@ Returns nil."
 	(message "There is not a %s at point!" thing))
     nil))
 
+(defun ok:select-thing-at-point (thing)
+  ;; ¤note: similar to mark...
+  "Select the THING at point if any.
+
+Returns nil."
+  (let ((frontier (bounds-of-thing-at-point thing) ))
+    ;; §later: try catch error?
+    (if frontier
+	(progn
+	  (push-mark) ; save old mark
+	  (set-mark (car frontier))
+	  (goto-char  (cdr frontier)))
+	(message "There is not a %s at point!" thing))
+    nil))
+
 (defun ok:copy-thing-at-point (thing)
   "Try to copy the THING at point.  (use kill-new for now)
 
@@ -97,9 +112,12 @@ Returns the value grabed, otherwise nil."
   "Generate all the functions associated with the given THING"
   (ok:generate-copy-command thing)
   (ok:generate-delete-command thing)
-  (ok:generate-kill-command thing))
+  (ok:generate-kill-command thing)
+  (ok:generate-select-command thing))
 ;; §name: maybe copy-this-THING rather than omny-copy? [user choice?]
 
+
+;; §maybe: macro generate the macro... ^^
 (defmacro ok:generate-copy-command (symb)
   "Generate a copy command for the given SYMB."
  `(defun ,(intern (format "omni-copy-%s" (eval symb))) ()
@@ -120,6 +138,14 @@ Returns the value grabed, otherwise nil."
      ,(format "Kill the %s at point"  (eval symb))
      (interactive)
      (ok:kill-thing-at-point ',(eval symb))))
+
+(defmacro ok:generate-select-command ( symb)
+  "Generate a select command for the given SYMB."
+  `(defun ,(intern (format "omni-select-%s" (eval symb))) ()
+     ,(format "Select the %s at point"  (eval symb))
+     (interactive)
+     (ok:select-thing-at-point ',(eval symb))))
+
 
 (defun ok:get-all-the-things()
   "Generate all the omni functions for the list of things."

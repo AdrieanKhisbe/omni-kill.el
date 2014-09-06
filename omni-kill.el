@@ -34,7 +34,29 @@
 
 ;; kill-thing at point
 
-;; copy-thing-at-point
+(defun ok:kill-thing-at-point (thing)
+  "Kill the THING at point if any.
+
+Returns nil."
+  (let ((frontier (bounds-of-thing-at-point thing) ))
+    ;; §later: try catch error?
+    (if frontier
+	 (kill-region (car frontier) (cdr frontier))
+	(message "There is not a %s at point!" thing))
+    ;; §check if can be chained.
+    nil))
+
+(defun ok:delete-thing-at-point (thing)
+  "Delete the THING at point if any.
+
+Returns nil."
+  (let ((frontier (bounds-of-thing-at-point thing) ))
+    ;; §later: try catch error?
+    (if frontier
+	 (delete-region (car frontier) (cdr frontier))
+	(message "There is not a %s at point!" thing))
+    nil))
+
 (defun ok:copy-thing-at-point (thing)
   "Try to copy the THING at point.  (use kill-new for now)
 
@@ -56,8 +78,8 @@ Returns the value grabed, otherwise nil."
 ;; §see: clipboard function: clipboard-yank, etc!!!!!
 ;; §see: xsel
 
-;; delete-thing at-point.
 
+;; §later: store-thing..
 ;; ¤> functions
 ;; §then: macro generate all the functions!
 
@@ -70,6 +92,15 @@ Returns the value grabed, otherwise nil."
   ;; §see: clipboard function: clipboard-yank, etc!!!!!
   ;; §see: xsel
   (ok:copy-thing-at-point 'url))
+
+;; §tmp. for testing issue. then consider how to create then à la chain!!
+(defun delete-url()
+  (interactive)
+  (ok:delete-thing-at-point 'url))
+
+(defun kill-url()
+  (interactive)
+  (ok:kill-thing-at-point 'url))
 
 (provide 'omni-kill)
 ;;; omni-kill.el ends here

@@ -27,6 +27,16 @@
 
 ;;; Code:
 
+;; make it a wrapper firt: `copy-at-point'
+;; §in specific file?
+;; §todo: copy url at point
+(defun copy-url()
+  (interactive)
+  ;; ¤proto §todo: check if url first
+;; make it in the clipboard.
+;; §see: clipboard function: clipboard-yank, etc!!!!!
+;; §see: xsel
+  (kill-new (thing-at-point 'url)))
 
 
 (provide 'omni-kill)

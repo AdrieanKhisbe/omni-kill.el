@@ -130,22 +130,9 @@ Returns the value grabed, otherwise nil."
 ;; §maybe user custom for list?
 
 
-(defun copy-url()
-  (interactive)
-  ;; ¤proto §todo: check if url first
-  ;; make it in the clipboard.
-  ;; §see: clipboard function: clipboard-yank, etc!!!!!
-  ;; §see: xsel
-  (ok:copy-thing-at-point 'url))
 
-;; §tmp. for testing issue. then consider how to create then à la chain!!
-(defun delete-url()
-  (interactive)
-  (ok:delete-thing-at-point 'url))
-
-(defun kill-url()
-  (interactive)
-  (ok:kill-thing-at-point 'url))
+;; set up all commands:
+(ok:get-all-the-things)
 
 (provide 'omni-kill)
 ;;; omni-kill.el ends here

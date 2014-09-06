@@ -35,21 +35,26 @@
 ;; kill-thing at point
 
 ;; copy-thing-at-point
-(defun ok:copy-at-point (thing)
-  "Try to copy the THING at point.  (use kill-new for now)"
-  ;; §later: interactive arguments
+(defun ok:copy-thing-at-point (thing)
+  "Try to copy the THING at point.  (use kill-new for now)
+
+Returns the value grabed, otherwise nil."
   ;; §later: reconsider signature? (send the catch?)
   (let ((the-thing (thing-at-point thing) ))
     ;; §later: try catch error?
     (if the-thing
-	(kill-new the-thing)
+	(progn
+	 (kill-new the-thing)
+	 (message "%s was copied" thing)
+	 the-thing)
       (progn
 	(message "There is not a %s at point!" thing)
 	     nil))))
-  ;; §later:  make it in the clipboard.
 
-  ;; §see: clipboard function: clipboard-yank, etc!!!!!
-  ;; §see: xsel
+;; §later:  make it in the clipboard.
+
+;; §see: clipboard function: clipboard-yank, etc!!!!!
+;; §see: xsel
 
 ;; delete-thing at-point.
 
@@ -57,18 +62,14 @@
 ;; §then: macro generate all the functions!
 
 
-;; clipboard and co
 
-;; make it a wrapper firt: `copy-at-point'
-;; §in specific file?
-;; §todo: copy url at point
 (defun copy-url()
   (interactive)
   ;; ¤proto §todo: check if url first
   ;; make it in the clipboard.
   ;; §see: clipboard function: clipboard-yank, etc!!!!!
   ;; §see: xsel
-  (ok:copy-at-point 'url))
+  (ok:copy-thing-at-point 'url))
 
 (provide 'omni-kill)
 ;;; omni-kill.el ends here

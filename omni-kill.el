@@ -35,6 +35,21 @@
 ;; kill-thing at point
 
 ;; copy-thing-at-point
+(defun ok:copy-at-point (thing)
+  "Try to copy the THING at point.  (use kill-new for now)"
+  ;; §later: interactive arguments
+  ;; §later: reconsider signature? (send the catch?)
+  (let ((the-thing (thing-at-point thing) ))
+    ;; §later: try catch error?
+    (if the-thing
+	(kill-new the-thing)
+      (progn
+	(message "There is not a %s at point!" thing)
+	     nil))))
+  ;; §later:  make it in the clipboard.
+
+  ;; §see: clipboard function: clipboard-yank, etc!!!!!
+  ;; §see: xsel
 
 ;; delete-thing at-point.
 
@@ -53,8 +68,7 @@
   ;; make it in the clipboard.
   ;; §see: clipboard function: clipboard-yank, etc!!!!!
   ;; §see: xsel
-  (kill-new (thing-at-point 'url)))
-
+  (ok:copy-at-point 'url))
 
 (provide 'omni-kill)
 ;;; omni-kill.el ends here

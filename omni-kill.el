@@ -27,15 +27,32 @@
 
 ;;; Code:
 
+(require 'thingatpt)
+
+;; ¤> thing at point wrappers
+;; §todo: select thing at pt
+
+;; kill-thing at point
+
+;; copy-thing-at-point
+
+;; delete-thing at-point.
+
+;; ¤> functions
+;; §then: macro generate all the functions!
+
+
+;; clipboard and co
+
 ;; make it a wrapper firt: `copy-at-point'
 ;; §in specific file?
 ;; §todo: copy url at point
 (defun copy-url()
   (interactive)
   ;; ¤proto §todo: check if url first
-;; make it in the clipboard.
-;; §see: clipboard function: clipboard-yank, etc!!!!!
-;; §see: xsel
+  ;; make it in the clipboard.
+  ;; §see: clipboard function: clipboard-yank, etc!!!!!
+  ;; §see: xsel
   (kill-new (thing-at-point 'url)))
 
 

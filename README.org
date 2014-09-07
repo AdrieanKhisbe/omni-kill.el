@@ -1,0 +1,39 @@
+*Omni Kill*
+
+/Kill them all the things/
+
+* Description
+
+This /in early development/ library is there to assist emacs user to quickly copy, select, kill, ... things that are at point: emails, url, sentence...
+It's built on top of =thingatpt=, and just provide wrapper functions.
+
+* Installation
+
+To install it, just put the `omni-kill.el` in your load path, and require it.
+# For now just this to do.
+Wait it to mature a bit and you might get =some el-get= recipe, before it hits elpa, melpa, quelpa or else.
+
+* Usage
+
+Once loaded you will have at you disposal many commands to grab, kill, delete, "Things" that are at point.
+The naming scheme for these commands are by default =omni-ACTION-THING=, with:
+
+- actions :: =copy, delete, select, kill=
+- things :: =symbol list sexp defun filename url email word sentence whitespace line number page= (aka the default =thingatpt=)
+
+If you want to adapt or change the naming scheme, just run =M-x customization-group RET omni-kill=. You can also add to the list your custom =things=.
+
+#
+Besides if you need you can directly use the functions =(ok:ACTION-thing-at-point THING)=
+
+All the commands listed before just delegate their functionnalities to these functions.
+/(Be reassure, they are dry, commands being macro generated)/
+
+* Notes
+
+This is still a prototype. So if ever you think about using it, prefer the =master= branch, and expect to update your config.
+
+Work is in progress so many extension are on the way, but I'll try to avoid incompatible change on he =master= branch
+# §more
+
+*If you have any remark, refactor suggestion or else, just pose an issue ;)*

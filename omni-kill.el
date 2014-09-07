@@ -42,10 +42,18 @@
 (defcustom omni-kill-naming-scheme
   "omni-%s-%s"
   "Naming pattern of generated patters.
-The first placeholder correspond to the action, the second to the thing.
+
+It must contains two '%s placeholders:
+- The first placeholder correspond to the action,
+- the second to the thing.
 
 Changing this would only have effect at next startup."
-  :type 'string ; §check (function  )
+  :type '(restricted-sexp
+          :match-alternatives
+          ((lambda (x) (and (stringp x)
+			    (string-match-p "\\s_*%s\\s_*%s\\s_*" x)
+			    ;; ¤note: hack since did not managed to make the anchors work
+			    (not (string-match-p "\\s-" x))))))
   :group 'omni-kill)
 
 

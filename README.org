@@ -7,12 +7,6 @@
 This /in early development/ library is there to assist emacs user to quickly copy, select, kill, ... things that are at point: emails, url, sentence...
 It's built on top of =thingatpt=, and just provide wrapper functions.
 
-* Installation
-
-To install it, just put the `omni-kill.el` in your load path, and require it.
-# For now just this to do.
-Wait it to mature a bit and you might get =some el-get= recipe, before it hits elpa, melpa, quelpa or else.
-
 * Usage
 
 Once loaded you will have at you disposal many commands to grab, kill, delete, "Things" that are at point.
@@ -21,13 +15,34 @@ The naming scheme for these commands are by default =omni-ACTION-THING=, with:
 - actions :: =copy, delete, select, kill=
 - things :: =symbol list sexp defun filename url email word sentence whitespace line number page= (aka the default =thingatpt=)
 
-If you want to adapt or change the naming scheme, just run =M-x customization-group RET omni-kill=. You can also add to the list your custom =things=.
+If you want to adapt or change the naming scheme, just run =M-x customization-group RET omni-kill=. You can also add to the list your custom =things=. By default you will get =omni-copy-url=, =omni-delete-line=, and so on.
+
+Besides you can use the /dispatch/ functions. They take as argument the next key you type, and look on an alist to get the associated thing.
+These are named =omni-ACTION=, and the char to thing association can be customized through the == custom.
+
+For example calling =omni-kill= followed by the letter =e=, will kill the current =email= at point if any.
 
 #
-Besides if you need you can directly use the functions =(ok:ACTION-thing-at-point THING)=
-
+Also if you need you can directly use the functions =(ok:ACTION-thing-at-point THING)= in your lisp code..
 All the commands listed before just delegate their functionnalities to these functions.
 /(Be reassure, they are dry, commands being macro generated)/
+
+* Installation
+
+To install it, just put the `omni-kill.el` in your load path, and require it.
+# For now just this to do.
+Then bind the commands to the keybinding that suit you.
+
+If you are using =use-package=, here is the config you could use.
+#+begin_src emacs-lisp
+  (use-package omni-kill
+      :bind (("M-s c". omni-copy)
+             ("M-s d". omni-delete)
+             ("M-s k". omni-kill)
+             ("M-s s". omni-select)))
+#+end_src
+
+Wait it to mature a bit and you might get =some el-get= recipe, before it hits elpa, melpa, quelpa or else.
 
 * Notes
 

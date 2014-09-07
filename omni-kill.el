@@ -4,7 +4,7 @@
 
 ;; Author: Adrien Becchis <adriean.khisbe@live.fr>
 ;; Created:  2014-09-06
-;; Version: 0.1
+;; Version: 0.2
 ;; Keywords: convenience, editing, tools
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -139,9 +139,7 @@ Returns the value grabed, otherwise nil."
 ;; §see: clipboard function: clipboard-yank, etc!!!!!
 ;; §see: xsel
 
-
 ;; §later: store-thing..
-
 
 ;;; ¤> Function generators
 (defun ok:generate-all-the-fun (thing)
@@ -152,7 +150,7 @@ Returns the value grabed, otherwise nil."
   (ok:generate-select-command thing)
   (mapc (lambda (a) (ok:generate-dispatch-command a))
 	'("copy" "delete" "kill" "select")))
-;; §later: factorize macros
+;; §later: factorize macros + §next bump: two level multiplexer!!! on action, then on thing!!
 
 (defun omni-help ()
   "Display the letter to thing associations for the omni-dispatch functions"

@@ -56,6 +56,22 @@ Changing this would only have effect at next startup."
 			    (not (string-match-p "\\s-" x))))))
   :group 'omni-kill)
 
+(defcustom ok:thing-to-letter-alist
+  '((?d . 'defun)
+    (?e . 'email)
+    (?f . 'filename)
+    (?l . 'line)
+    (?l . 'list)
+    (?n . 'number)
+    (?P . 'page)
+    (?p . 'sentence)
+    (?S . 'sexp)
+    (?s . 'symbol)
+    (?u . 'url)
+    (?W . 'whitespace)
+    (?w . 'word))
+  "Alist to store the letter associated with a thing for the vi like functions"
+  :type '(alist :key-type char :value-type symbol))
 
 ;; ¤> thing at point wrappers
 ;; §todo: select thing at pt
@@ -133,6 +149,17 @@ Returns the value grabed, otherwise nil."
   (ok:generate-select-command thing))
 ;; §name: maybe copy-this-THING rather than omny-copy? [user choice?]
 
+(defmacro ok:generate-dispatch-command (action)
+  "Generate a dispath command for the given action."
+ `(defun ,(intern (format "omni-%s" (eval action))) (char)
+       ;;,(format "" (eval acion)) ;§todo: doc
+       (interactive "c:Pick a thing");§later: recap list
+       (let ((thing (cdr-safe (assoc char ok:thing-to-letter-alist))))
+	 (if thing
+	     (,(intern (format "ok:%s-thing-at-point" (eval action) )) thing)
+	     (message "No thing is associated at letter %s" char)
+	   ;; §later: recap
+	   nil))))
 
 ;; §maybe: macro generate the macro... ^^
 (defmacro ok:generate-copy-command (symb)

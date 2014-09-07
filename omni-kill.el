@@ -55,21 +55,22 @@ Changing this would only have effect at next startup."
 			    ;; ¤note: hack since did not managed to make the anchors work
 			    (not (string-match-p "\\s-" x))))))
   :group 'omni-kill)
+;; §name: maybe copy-this-THING rather than omny-copy by default
 
 (defcustom ok:thing-to-letter-alist
-  '((?d . 'defun)
-    (?e . 'email)
-    (?f . 'filename)
-    (?l . 'line)
-    (?l . 'list)
-    (?n . 'number)
-    (?P . 'page)
-    (?p . 'sentence)
-    (?S . 'sexp)
-    (?s . 'symbol)
-    (?u . 'url)
-    (?W . 'whitespace)
-    (?w . 'word))
+  '((?d . defun)
+    (?e . email)
+    (?f . filename)
+    (?l . line)
+    (?l . list)
+    (?n . number)
+    (?P . page)
+    (?p . sentence)
+    (?S . sexp)
+    (?s . symbol)
+    (?u . url)
+    (?W . whitespace)
+    (?w . word))
   "Alist to store the letter associated with a thing for the vi like functions"
   :type '(alist :key-type char :value-type symbol))
 
@@ -115,6 +116,8 @@ Returns nil."
 	  (goto-char  (cdr frontier)))
 	(message "There is not a %s at point!" thing))
     nil))
+;; §maybe: message should go up, in thegenerated functions (note: after macro extraction?)
+
 
 (defun ok:copy-thing-at-point (thing)
   "Try to copy the THING at point.  (use kill-new for now)
@@ -146,14 +149,17 @@ Returns the value grabed, otherwise nil."
   (ok:generate-copy-command thing)
   (ok:generate-delete-command thing)
   (ok:generate-kill-command thing)
-  (ok:generate-select-command thing))
-;; §name: maybe copy-this-THING rather than omny-copy? [user choice?]
+  (ok:generate-select-command thing)
+  (mapc (lambda (a) (ok:generate-dispatch-command a))
+	'("copy" "delete" "kill" "select")))
+;; §later: factorize macros
+
 
 (defmacro ok:generate-dispatch-command (action)
   "Generate a dispath command for the given action."
  `(defun ,(intern (format "omni-%s" (eval action))) (char)
        ;;,(format "" (eval acion)) ;§todo: doc
-       (interactive "c:Pick a thing");§later: recap list
+       (interactive "cPick a thing:");§later: recap list
        (let ((thing (cdr-safe (assoc char ok:thing-to-letter-alist))))
 	 (if thing
 	     (,(intern (format "ok:%s-thing-at-point" (eval action) )) thing)

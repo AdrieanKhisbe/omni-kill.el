@@ -154,17 +154,24 @@ Returns the value grabed, otherwise nil."
 	'("copy" "delete" "kill" "select")))
 ;; §later: factorize macros
 
+(defun omni-help ()
+  "Display the letter to thing associations for the omni-dispatch functions"
+  (interactive)
+  (message "%s%s"
+	   (propertize "Letter2Thing: " 'face 'font-lock-type-face)
+	   (mapconcat (lambda (cs) (format "%c:%s" (car cs) (cdr cs)))
+		      ok:thing-to-letter-alist " ")))
 
 (defmacro ok:generate-dispatch-command (action)
   "Generate a dispath command for the given action."
  `(defun ,(intern (format "omni-%s" (eval action))) (char)
-       ;;,(format "" (eval acion)) ;§todo: doc
+       ,(format "%s the thing associated with the given CHAR.
+Association are stored in the `ok:thing-to-letter-alist' variable" (capitalize (eval action))) ;§todo: doc
        (interactive "cPick a thing:");§later: recap list
        (let ((thing (cdr-safe (assoc char ok:thing-to-letter-alist))))
 	 (if thing
 	     (,(intern (format "ok:%s-thing-at-point" (eval action) )) thing)
-	     (message "No thing is associated at letter %s" char)
-	   ;; §later: recap
+	     (message "No thing is associated at letter %s  (for memory refresh, run `omni-help')" char)
 	   nil))))
 
 ;; §maybe: macro generate the macro... ^^
@@ -195,7 +202,6 @@ Returns the value grabed, otherwise nil."
      ,(format "Select the %s at point"  (eval symb))
      (interactive)
      (ok:select-thing-at-point ',(eval symb))))
-
 
 (defun ok:get-all-the-things()
   "Generate all the omni functions for the list of things."

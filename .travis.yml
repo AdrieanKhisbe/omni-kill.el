@@ -1,4 +1,5 @@
 language: emacs-lisp
+sudo: required
 before_install:
   - curl -fsSkL https://gist.github.com/rejeep/7736123/raw > travis.sh && source ./travis.sh
   - export PATH="/home/travis/.cask/bin:$PATH"
@@ -8,7 +9,5 @@ before_install:
 env:
   - EVM_EMACS=emacs-24.4-bin
   - EVM_EMACS=emacs-24.3-bin
-  - EVM_EMACS=emacs-24.2-bin
-  - EVM_EMACS=emacs-24.1-bin
 script:
   - emacs --version

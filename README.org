@@ -1,13 +1,18 @@
-*Omni Kill*
+* Omni Kill
+
+[[https://travis-ci.org/AdrieanKhisbe/omni-kill.el][file:https://travis-ci.org/AdrieanKhisbe/omni-kill.el.svg]]
+[[http://melpa.org/#/omni-kill][file:http://melpa.org/packages/omni-kill-badge.svg]]
+[[http://stable.melpa.org/#/omni-kill][file:http://stable.melpa.org/packages/omni-kill-badge.svg]]
+[[http://www.gnu.org/licenses/gpl-3.0.html][http://img.shields.io/:license-gpl3-blue.svg]]
 
 /Kill them all the things/
 
-* Description
+** Descriptlon
 
 This /in early development/ library is there to assist emacs user to quickly copy, select, kill, ... things that are at point: emails, url, sentence...
 It's built on top of =thingatpt=, and just provide wrapper functions.
 
-* Usage
+** Usage
 
 Once loaded you will have at you disposal many commands to grab, kill, delete, "Things" that are at point.
 The naming scheme for these commands are by default =omni-ACTION-THING=, with:
@@ -27,10 +32,9 @@ Also if you need you can directly use the functions =(ok:ACTION-thing-at-point T
 All the commands listed before just delegate their functionnalities to these functions.
 /(Be reassure, they are dry, commands being macro generated)/
 
-* Installation
+** Installation
 
-To install it, just put the `omni-kill.el` in your load path, and require it.
-# For now just this to do.
+To install it, install the package from =melpa= or just put the `omni-kill.el` in your load path, and require it.
 Then bind the commands to the keybinding that suit you.
 
 If you are using =use-package=, here is the config you could use.
@@ -42,9 +46,7 @@ If you are using =use-package=, here is the config you could use.
              ("M-s s". omni-select)))
 #+end_src
 
-Wait it to mature a bit and you might get =some el-get= recipe, before it hits elpa, melpa, quelpa or else.
-
-* Notes
+** Notes
 
 This is still a prototype. So if ever you think about using it, prefer the =master= branch, and expect to update your config.
 

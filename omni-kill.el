@@ -1,4 +1,4 @@
-;;; omni-kill.el --- Kill them all the things
+;;; omni-kill.el --- Kill all the things
 
 ;; Copyright (C) 2014-2015  Adrien Becchis
 

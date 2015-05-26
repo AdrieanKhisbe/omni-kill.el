@@ -2,6 +2,15 @@
 ;; files in this directory whose names end with "-steps.el" will be
 ;; loaded automatically by Ecukes.
 
+(When "^I go to the beginning of the buffer$"
+      (lambda ()
+        (call-interactively 'beginning-of-buffer)))
+
+(When "^I call \"\\(.+\\)\"$"
+      (lambda (function)
+        (funcall (intern function))))
+
+
 (Given "^I have \"\\(.+\\)\"$"
   (lambda (something)
     ;; ...

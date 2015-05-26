@@ -1,11 +1,61 @@
-Feature: Do Some things
-  In order to do something
-  As a user
-  I want to do something
+Feature: Kill all the things
+  In order to do make quick edits
+  As a emacs user
+  I want to do be able to quickly grab, kill, what under point
 
-  Scenario: Do Something
-    Given I have "something"
-    When I have "something"
-    Then I should have "something"
-    And I should have "something"
-    But I should not have "something"
+  Scenario: Basic Killing
+    Given I switch to buffer "*omni-kill*" 
+     And I clear the buffer
+     And I insert:
+      """
+      Word on Line 1
+      Line 2
+
+      New paragraph
+      """
+      And I go to the beginning of the buffer
+
+  Scenario: Kill a word
+    When I call "omni-kill-word"
+    Then I should see:
+      """
+      on Line 1
+      Line 2
+
+      New paragraph
+      """
+
+  Scenario: Kill a line
+    When  I call "omni-kill-line"
+    Then I should see:
+      """
+      Line 2
+
+      New paragraph
+      """
+
+  Scenario: Copy a line
+    When  I call "omni-copy-line"
+    And I press "C-y"    
+    Then I should see:
+      """
+      on Line 1
+      on Line 1
+      Line 2
+
+      New paragraph
+      """
+
+  Scenario: Copy a line
+    When  I call "omni-delete-number"
+    Then I should see:
+      """
+      Word on Line 1
+      Line 2
+
+      New paragraph
+      """
+    And I should see message "There is not a number at point!"
+
+
+# §TODO: some for copy, delete

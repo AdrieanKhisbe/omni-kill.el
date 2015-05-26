@@ -57,7 +57,8 @@ Feature: Kill all the things
     And I should see message "There is not a number at point!"
 
   Scenario: Succeed to copy a number after deleting a word
-    When I call "omni-delete-word"
+    When I go to the beginning of the buffer
+    And I call "omni-delete-word"
     And I call "omni-delete-whitespace"
     And I call "omni-copy-number"
     And I press "C-y"

@@ -4,7 +4,7 @@
 
 ;; Author: Adrien Becchis <adriean.khisbe@live.fr>
 ;; Created:  2014-09-06
-;; Version: 0.2.2
+;; Version: 0.2.3
 ;; Keywords: convenience, editing, tools
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -129,11 +129,13 @@ Returns the value grabed, otherwise nil."
   ;; §later: reconsider signature? (send the catch?)
   (let ((the-thing (thing-at-point thing) ))
     ;; §later: try catch error?
+    (message "%s" the-thing)
     (if the-thing
         (progn
-         (kill-new the-thing)
-         (message "%s was copied" thing)
-         the-thing)
+          (kill-new (format "%s" the-thing))
+          ;; ¤note: this is to protect from number grabing
+          (message "%s was copied" thing)
+          the-thing)
       (progn
         (message "There is not a %s at point!" thing)
              nil))))

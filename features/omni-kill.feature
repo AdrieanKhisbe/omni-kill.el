@@ -39,23 +39,35 @@ Feature: Kill all the things
     And I press "C-y"    
     Then I should see:
       """
-      on Line 1
-      on Line 1
+      Line 2
       Line 2
 
       New paragraph
       """
 
-  Scenario: Copy a line
+  Scenario: Fail to delete a number
     When  I call "omni-delete-number"
     Then I should see:
       """
-      Word on Line 1
+      Line 2
       Line 2
 
       New paragraph
       """
     And I should see message "There is not a number at point!"
 
+  Scenario: Succeed to copy a number after deleting a word
+    When I call "omni-delete-word"
+    And I call "omni-delete-whitespace"
+    And I call "omni-copy-number"
+    And I press "C-y"
+    Then I should see:
+      """
+      22
+      Line 2
+
+      New paragraph
+      """
+    And I should see message "There is not a number at point!"
 
 # §TODO: some for copy, delete

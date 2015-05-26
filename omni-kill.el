@@ -4,7 +4,7 @@
 
 ;; Author: Adrien Becchis <adriean.khisbe@live.fr>
 ;; Created:  2014-09-06
-;; Version: 0.2.1
+;; Version: 0.2.2
 ;; Keywords: convenience, editing, tools
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -172,8 +172,8 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
        (let ((thing (cdr-safe (assoc char omni-kill-thing-to-letter-alist))))
          (if thing
              (,(intern (format "omni-kill-%s-thing-at-point" (eval action) )) thing)
-             (message "No thing is associated at letter %s  (for memory refresh, run `omni-help')" char)
-           nil))))
+           (progn (message "No thing is associated at letter %s  (for memory refresh, run `omni-help')" char)
+           nil)))))
 
 ;; §maybe: macro generate the macro... ^^
 (defmacro omni-kill-generate-copy-command (symb)

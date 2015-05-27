@@ -37,7 +37,7 @@
     :group 'editing)
 
 (defcustom omni-kill-thing-list
-  '(symbol list sexp defun filename url email word sentence whitespace line number page )
+  '(symbol list sexp defun filename url email word sentence whitespace line number page)
   "List of THING symbols for which omni kill will create a function."
   :type '(repeat symbol)
   :group 'omni-kill)
@@ -126,8 +126,7 @@ Returns nil."
   "Try to copy the THING at point.  (use `kill-new' for now).
 
 Returns the value grabed, otherwise nil."
-  ;; §later: reconsider signature? (send the catch?)
-  (let ((the-thing (thing-at-point thing) ))
+  (let ((the-thing (thing-at-point thing)))
     ;; §later: try catch error?
     (message "%s" the-thing)
     (if the-thing
@@ -138,7 +137,7 @@ Returns the value grabed, otherwise nil."
           the-thing)
       (progn
         (message "There is not a %s at point!" thing)
-             nil))))
+        nil))))
 
 ;; §later:  make it in the clipboard.
 ;; §see: clipboard function: clipboard-yank, etc!!!!!
@@ -192,14 +191,14 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
        (interactive)
        (omni-kill-delete-thing-at-point ',(eval symb))))
 
-(defmacro omni-kill-generate-kill-command ( symb)
+(defmacro omni-kill-generate-kill-command (symb)
   "Generate a kill command for the given SYMB."
   `(defun ,(intern (format omni-kill-naming-scheme "kill" (eval symb))) ()
-     ,(format "Kill the %s at point"  (eval symb))
+     ,(format "Kill the %s at point" (eval symb))
      (interactive)
      (omni-kill-kill-thing-at-point ',(eval symb))))
 
-(defmacro omni-kill-generate-select-command ( symb)
+(defmacro omni-kill-generate-select-command (symb)
   "Generate a select command for the given SYMB."
   `(defun ,(intern (format omni-kill-naming-scheme "select" (eval symb))) ()
      ,(format "Select the %s at point"  (eval symb))

@@ -8,7 +8,7 @@
 
 (When "^I call \"\\(.+\\)\"$"
       (lambda (function)
-        (funcall (intern function))))
+        (call-interactively (intern function))))
 
 
 (Given "^I have \"\\(.+\\)\"$"

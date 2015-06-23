@@ -1,11 +1,13 @@
 * Omni Kill
 
 [[https://travis-ci.org/AdrieanKhisbe/omni-kill.el][file:https://travis-ci.org/AdrieanKhisbe/omni-kill.el.svg]]
+[[https://coveralls.io/r/AdrieanKhisbe/omni-kill.el][file:https://coveralls.io/repos/AdrieanKhisbe/omni-kill.el/badge.svg]]
 [[http://melpa.org/#/omni-kill][file:http://melpa.org/packages/omni-kill-badge.svg]]
 [[http://stable.melpa.org/#/omni-kill][file:http://stable.melpa.org/packages/omni-kill-badge.svg]]
+[[https://github.com/AdrieanKhisbe/omni-kill.el/tags][file:https://img.shields.io/github/tag/AdrieanKhisbe/omni-kill.el.svg]]
 [[http://www.gnu.org/licenses/gpl-3.0.html][http://img.shields.io/:license-gpl3-blue.svg]]
 
-/Kill them all the things/
+/Kill all the things! \o//
 
 ** Descriptlon
 

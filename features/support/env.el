@@ -11,6 +11,10 @@
 
 (add-to-list 'load-path omni-kill-root-path)
 
+(require 'undercover)
+(undercover "*.el" "omni-kill/*.el"
+            (:exclude "*-test.el")
+            (:report-file "/tmp/undercover-report.json"))
 (require 'omni-kill)
 (require 'espuds)
 (require 'ert)

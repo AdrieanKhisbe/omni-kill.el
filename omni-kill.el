@@ -119,13 +119,7 @@ Returns nil."
 ;; §later: store-thing! :)
 
 ;;; ¤> Function generators
-(defun omni-kill-generate-all-the-fun (thing)
-  "Generate all the functions associated with the given THING."
-  (mapc (lambda (action)
-          (omni-kill--generate-dispatch-command action)
-          (omni-kill--generate-command action thing))
-        '("copy" "delete" "kill" "select")))
-;; §later: factorize macros + §next bump: two level multiplexer!!! on action, then on thing!!
+;; §maybe: next bump: two level multiplexer!!! on action, then on thing!!
 
 (defun omni-kill-help ()
   "Display the letter to thing associations for the omni-dispatch functions."
@@ -149,7 +143,6 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
            (progn (message "No thing is associated at letter '%s' (for memory refresh, run `omni-help')" (char-to-string char))
            nil)))))
 
-
 (defmacro omni-kill--generate-command (command symb)
   "Generate a COMMAND command for the given SYMB."
  `(defun ,(intern (format omni-kill-naming-scheme (eval command) (eval symb))) ()
@@ -164,9 +157,17 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
   "Generate all the omni functions for the list of things."
   ;; §tofix: eager macro expansion failure
   ;; §wtf: does not happen when manually load.
-  (mapc (lambda (arg) (omni-kill-generate-all-the-fun arg))
-        omni-kill-thing-list))
+  (mapc (lambda (action)
+          (omni-kill--generate-all-the-fun action))
+        '("copy" "delete" "kill" "select")))
 ;; §maybe: user custom for list?
+
+(defun omni-kill--generate-all-the-fun (action)
+  "Generate all the functions associated with the given ACTION."
+  (omni-kill--generate-dispatch-command action)
+  (mapc (lambda (thing)
+         (omni-kill--generate-command action thing))
+        omni-kill-thing-list))
 
 ;; set up all commands:
 (omni-kill-get-all-the-things)

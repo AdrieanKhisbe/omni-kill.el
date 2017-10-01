@@ -167,7 +167,7 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
   ;; §wtf: does not happen when manually load.
   (mapc (lambda (action)
           (omni-kill--generate-all-the-fun action))
-        '("copy" "delete" "kill" "select")))
+        (mapcar 'car omni-kill-action-alist)))
 ;; §maybe: user custom for list?
 
 (defun omni-kill--generate-all-the-fun (action)

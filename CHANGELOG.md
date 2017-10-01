@@ -5,6 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 - *Nothing so far*
+## [0.5.0] - 2017-10-01
+### Added
+- 4 new actions:
+  - narrow
+  - save to register
+  - go to start/beginning
+  - go to end
 ## [0.4.0] - 2017-10-01
 ### Added
 - function to destroy the commands
@@ -18,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - support of broken `number` thing
 
 <!-- history digging to be made -->
-[unreleased]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.4.0...HEAD
-[0.3.0]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.3.0....v0.4.0
+[unreleased]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.3.0....v0.4.0
 [0.3.0]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/547b0a1....v0.3.0

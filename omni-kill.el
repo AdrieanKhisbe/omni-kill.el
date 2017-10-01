@@ -174,8 +174,17 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
   "Generate all the functions associated with the given ACTION."
   (omni-kill--generate-dispatch-command action)
   (mapc (lambda (thing)
-         (omni-kill--generate-command action thing))
+          (omni-kill--generate-command action thing))
         omni-kill-thing-list))
+
+(defun omni-kill-destroy-all-the-things()
+  "Unenerate all the omni functions for the list of things."
+  (mapc (lambda (action)
+          (omni-kill--destroy-dispatch-command action)
+          (mapc (lambda (thing)
+                  (omni-kill--destroy-command action thing))
+                omni-kill-thing-list))
+        (mapcar 'car omni-kill-action-alist)))
 
 ;; set up all commands:
 (omni-kill-get-all-the-things)

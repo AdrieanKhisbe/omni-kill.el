@@ -76,8 +76,13 @@ Feature: Kill all the things
     Then the cursor should be before "paragraph"
     And  the cursor should be after "New "
 
-# §TODO: some for copy, delete
-
+  Scenario: Selecting line
+    When I call "omni-select-line"
+    Then the region should be:
+      """
+      New paragraph
+      """
+    #Then I should see "22"
   Scenario: Get some help
     When I call "omni-kill-help"
     Then I should see message "Letter2Thing: d:defun e:email f:filename l:line L:list P:page p:sentence S:sexp s:symbol u:url W:whitespace w:word"

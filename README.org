@@ -1,4 +1,4 @@
-* Omni Kill
+#+TITLE: Omni Kill
 
 [[https://travis-ci.org/AdrieanKhisbe/omni-kill.el][file:https://travis-ci.org/AdrieanKhisbe/omni-kill.el.svg]]
 [[https://coveralls.io/r/AdrieanKhisbe/omni-kill.el][file:https://coveralls.io/repos/AdrieanKhisbe/omni-kill.el/badge.svg]]
@@ -9,18 +9,18 @@
 
 /Kill all the things! \o//
 
-** Descriptlon
+* Descriptlon
 
 This /in early development/ library is there to assist emacs user to quickly copy, select, kill, ... things that are at point: emails, url, sentence...
 It's built on top of =thingatpt=, and just provide wrapper functions.
 
-** Usage
+* Usage
 
-Once loaded you will have at you disposal many commands to grab, kill, delete, "Things" that are at point.
+Once loaded you will have at you disposal many commands to grab, kill, delete, *“Things”* that are at point.
 The naming scheme for these commands are by default =omni-ACTION-THING=, with:
 
 - actions :: =copy, delete, select, kill=
-- things :: =symbol list sexp defun filename url email word sentence whitespace line number page= (aka the default =thingatpt=)
+- things :: =symbol list sexp defun filename url email word sentence whitespace line page= (aka the default =thingatpt=)
 
 If you want to adapt or change the naming scheme, just run =M-x customization-group RET omni-kill=. You can also add to the list your custom =things=. By default you will get =omni-copy-url=, =omni-delete-line=, and so on.
 
@@ -29,12 +29,8 @@ These are named =omni-ACTION=, and the char to thing association can be customiz
 
 For example calling =omni-kill= followed by the letter =e=, will kill the current =email= at point if any.
 
-#
-Also if you need you can directly use the functions =(ok:ACTION-thing-at-point THING)= in your lisp code..
-All the commands listed before just delegate their functionnalities to these functions.
-/(Be reassure, they are dry, commands being macro generated)/
 
-** Installation
+* Installation
 
 To install it, install the package from =melpa= or just put the `omni-kill.el` in your load path, and require it.
 Then bind the commands to the keybinding that suit you.
@@ -48,7 +44,7 @@ If you are using =use-package=, here is the config you could use.
              ("M-s s". omni-select)))
 #+end_src
 
-** Notes
+* Notes
 
 This is still a prototype. So if ever you think about using it, prefer the =master= branch, and expect to update your config.
 

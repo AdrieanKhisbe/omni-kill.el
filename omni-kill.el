@@ -57,6 +57,11 @@ Changing this would only have effect at next startup."
                             (string-match-p "\\s_*%s\\s_*%s\\s_*" x)
                             ;; ¤note: hack since did not managed to make the anchors work
                             (not (string-match-p "\\s-" x))))))
+  :initialize 'custom-initialize-default
+  :set (lambda (symb val)
+         (omni-kill-destroy-all-the-things)
+         (set-default symb val)
+         (omni-kill-get-all-the-things))
   :group 'omni-kill)
 ;; §name: maybe copy-this-THING rather than omny-copy by default
 
@@ -177,7 +182,7 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
           (omni-kill--generate-command action thing))
         omni-kill-thing-list))
 
-(defun omni-kill-destroy-all-the-things()
+(defun omni-kill-destroy-all-the-things ()
   "Unenerate all the omni functions for the list of things."
   (mapc (lambda (action)
           (omni-kill--destroy-dispatch-command action)

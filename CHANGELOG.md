@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 - *Nothing so far*
+## [0.4.0] - 2017-10-01
+### Added
+- function to destroy the commands
+- dynamically rename the commands by changing the custom naming scheme
 ## [0.3.0] - 2017-10-01
 ### Fixed
 - disabled byte-compilation that was broking the macros because of the defconst
@@ -14,5 +18,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - support of broken `number` thing
 
 <!-- history digging to be made -->
-[unreleased]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.4.0...HEAD
+[0.3.0]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/v0.3.0....v0.4.0
 [0.3.0]: https://github.com/AdrieanKhisbe/omni-kill.el/compare/547b0a1....v0.3.0

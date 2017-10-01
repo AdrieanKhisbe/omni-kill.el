@@ -143,6 +143,10 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
            (progn (message "No thing is associated at letter '%s' (for memory refresh, run `omni-help')" (char-to-string char))
            nil)))))
 
+(defun omni-kill--destroy-dispatch-command (command)
+  "Generate a dispath command for the given COMMAND."
+  (fmakunbound (intern (format "omni-%s" command))))
+
 (defmacro omni-kill--generate-command (command symb)
   "Generate a COMMAND command for the given SYMB."
  `(defun ,(intern (format omni-kill-naming-scheme (eval command) (eval symb))) ()
@@ -151,6 +155,10 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
        (omni-kill--do-thing-at-point
         ',(cdr (assoc (eval command) omni-kill-action-alist))
         ',(eval symb))))
+
+(defun omni-kill--destroy-command (command symb)
+  "Generate a dispath command for the given COMMAND."
+  (fmakunbound (intern (format omni-kill-naming-scheme command symb))))
 
 
 (defun omni-kill-get-all-the-things()

@@ -1,4 +1,4 @@
-;;; omni-kill.el --- Kill all the things  -*-no-byte-compile: t; -*-
+;;; omni-kill.el --- Kill all the things  -*- no-byte-compile: t; -*-
 
 ;; Copyright (C) 2014-2017  Adrien Becchis
 
@@ -92,7 +92,6 @@ Changing this would only have effect at next startup."
 Returns nil."
   (let ((frontier (bounds-of-thing-at-point thing)))
     ;; §later: try catch error?
-    (message "%s %s" thing action)
     (if frontier
         (funcall action (car frontier) (cdr frontier))
       (message "There is not a %s at point!" thing))

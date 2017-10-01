@@ -54,8 +54,7 @@ Changing this would only have effect at next startup."
   :type '(restricted-sexp
           :match-alternatives
           ((lambda (x) (and (stringp x)
-                            (string-match-p "\\s_*%s\\s_*%s\\s_*" x)
-                            ;; ¤note: hack since did not managed to make the anchors work
+                            (numberp (string-match-p "\\s_*%s\\(\\s_\\|\\sw\\)*%s\\s_*" x))
                             (not (string-match-p "\\s-" x))))))
   :initialize 'custom-initialize-default
   :set (lambda (symb val)

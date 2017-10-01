@@ -120,7 +120,7 @@ Returns nil."
 
 (defun register-region (start end)
   "Save region between START END to queries register."
-  (let ((register (read-char "Specify Register:")))
+  (let ((register (register-read-with-preview "Specify Register:")))
     (copy-to-register register start end)))
 
 ;; §later:  make it in the clipboard.

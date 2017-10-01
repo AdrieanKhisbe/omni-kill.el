@@ -87,7 +87,8 @@ Changing this would only have effect at next startup."
   '(("kill" . kill-region)
     ("delete" . delete-region)
     ("select" .  select-region)
-    ("copy" . copy-region)))
+    ("copy" . copy-region)
+    ("narrow" . narrow-to-region)))
 
 ;; kill-thing at point
 (defun omni-kill--do-thing-at-point (action thing)

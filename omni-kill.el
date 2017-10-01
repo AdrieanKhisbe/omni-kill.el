@@ -65,7 +65,7 @@ Changing this would only have effect at next startup."
     (?e . email)
     (?f . filename)
     (?l . line)
-    (?l . list)
+    (?L . list)
     (?P . page)
     (?p . sentence)
     (?S . sexp)

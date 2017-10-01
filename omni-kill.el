@@ -88,7 +88,8 @@ Changing this would only have effect at next startup."
     ("delete" . delete-region)
     ("select" .  select-region)
     ("copy" . copy-region)
-    ("narrow" . narrow-to-region)))
+    ("narrow" . narrow-to-region)
+    ("save" . register-region)))
 
 ;; kill-thing at point
 (defun omni-kill--do-thing-at-point (action thing)
@@ -116,6 +117,11 @@ Returns nil."
     (narrow-to-region start end)
     (kill-new (buffer-string))
     (widen)))
+
+(defun register-region (start end)
+  "Save region between START END to queries register."
+  (let ((register (read-char "Specify Register:")))
+    (copy-to-register register start end)))
 
 ;; §later:  make it in the clipboard.
 ;; §see: clipboard function: clipboard-yank, etc!!!!!

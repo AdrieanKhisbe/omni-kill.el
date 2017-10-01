@@ -69,6 +69,12 @@ Feature: Kill all the things
 
       New paragraph
       """
+  Scenario: Moving around
+    When I call "omni-end-page"
+    Then the cursor should be after "paragrap"
+    When I call "omni-start-word"
+    Then the cursor should be before "paragraph"
+    And  the cursor should be after "New "
 
 # §TODO: some for copy, delete
 

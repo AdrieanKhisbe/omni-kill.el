@@ -89,7 +89,9 @@ Changing this would only have effect at next startup."
     ("select" .  select-region)
     ("copy" . copy-region)
     ("narrow" . narrow-to-region)
-    ("save" . register-region)))
+    ("save" . register-region)
+    ("start" . region-start)
+    ("end" . region-end)))
 
 ;; kill-thing at point
 (defun omni-kill--do-thing-at-point (action thing)
@@ -122,6 +124,14 @@ Returns nil."
   "Save region between START END to queries register."
   (let ((register (register-read-with-preview "Specify Register:")))
     (copy-to-register register start end)))
+
+(defun region-start (start end)
+  "Go to stat of region between START END."
+  (goto-char start))
+
+(defun region-end (start end)
+  "Go to stat of region between START END."
+  (goto-char (1- end)))
 
 ;; §later:  make it in the clipboard.
 ;; §see: clipboard function: clipboard-yank, etc!!!!!

@@ -4,7 +4,7 @@ Feature: Kill all the things
   I want to do be able to quickly grab, kill, what under point
 
   Scenario: Basic Killing
-    Given I switch to buffer "*omni-kill*" 
+    Given I switch to buffer "*omni-kill*"
      And I clear the buffer
      And I insert:
       """
@@ -36,7 +36,7 @@ Feature: Kill all the things
 
   Scenario: Copy a line
     When  I call "omni-copy-line"
-    And I press "C-y"    
+    And I press "C-y"
     Then I should see:
       """
       Line 2
@@ -45,8 +45,8 @@ Feature: Kill all the things
       New paragraph
       """
 
-  Scenario: Fail to delete a number
-    When  I call "omni-delete-number"
+  Scenario: Fail to delete a email
+    When  I call "omni-delete-email"
     Then I should see:
       """
       Line 2
@@ -54,13 +54,13 @@ Feature: Kill all the things
 
       New paragraph
       """
-    And I should see message "There is not a number at point!"
+    And I should see message "There is not a email at point!"
 
-  Scenario: Succeed to copy a number after deleting a word
+  Scenario: Succeed to copy a word after deleting a word
     When I go to the beginning of the buffer
     And I call "omni-delete-word"
     And I call "omni-delete-whitespace"
-    And I call "omni-copy-number"
+    And I call "omni-copy-word"
     And I press "C-y"
     Then I should see:
       """
@@ -69,6 +69,5 @@ Feature: Kill all the things
 
       New paragraph
       """
-    And I should see message "There is not a number at point!"
 
 # §TODO: some for copy, delete

@@ -37,7 +37,7 @@
     :group 'editing)
 
 (defcustom omni-kill-thing-list
-  '(symbol list sexp defun filename url email word sentence whitespace line number page)
+  '(symbol list sexp defun filename url email word sentence whitespace line page)
   "List of THING symbols for which omni kill will create a function."
   :type '(repeat symbol)
   :group 'omni-kill)
@@ -66,7 +66,6 @@ Changing this would only have effect at next startup."
     (?f . filename)
     (?l . line)
     (?l . list)
-    (?n . number)
     (?P . page)
     (?p . sentence)
     (?S . sexp)

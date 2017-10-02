@@ -16,11 +16,11 @@ It's built on top of =thingatpt=, and just provide wrapper functions.
 
 * Usage
 
-Once loaded you will have at you disposal many commands to grab, kill, delete, *“Things”* that are at point.
+Once loaded you will have at you disposal many commands to kill, grab, delete, *“Things”* that are at point.
 The naming scheme for these commands are by default =omni-ACTION-THING=, with:
 
-- actions :: =kill, copy, delete, select, narrow, save (to register), go to start/end=
-- things :: =symbol list sexp defun filename url email word sentence whitespace line page= (aka the default =thingatpt=)
+- actions :: /kill/, /copy/, /delete/, /select/, /narrow/, /save/ (to register), go to /start/ / /end/
+- things :: =symbol=, =list=, =sexp=, =defun=, =filename=, =url=, =email=, =word=, =sentence=, =whitespace=, =line=, =page= aka the default =thingatpt=)
 
 
 Besides you can use the /dispatch/ functions. They take as argument the next key you type, and look on an alist to get the associated thing.
@@ -36,16 +36,19 @@ Then bind the commands to the keybinding that suit you.
 * Configuration
 If you are using =use-package=, here is the config you could use.
 #+begin_src emacs-lisp
-    (use-package omni-kill
-        :bind (("M-s c". omni-copy)
-               ("M-s d". omni-delete)
-               ("M-s k". omni-kill)
-               ("M-s s". omni-select)
-               ("M-s n". omni-narrow)
-               ("M-s r". omni-save)
-               ("M-s a". omni-start)
-               ("M-s e". omni-end)))
+  (use-package omni-kill
+      :defer nil
+      :bind (("M-s c". omni-copy)
+             ("M-s d". omni-delete)
+             ("M-s k". omni-kill)
+             ("M-s s". omni-select)
+             ("M-s n". omni-narrow)
+             ("M-s r". omni-save)
+             ("M-s a". omni-start)
+             ("M-s e". omni-end)))
 #+end_src
+
+Defer nil is needed so that the =omni-ACTION-THING= are created by loading the library. (there is no autoload for these commands, as they are macro generated)
 
 If you want to adapt or change the naming scheme, just run =M-x customization-group RET omni-kill=.
 You can also add to the list your custom =things=. By default you will get =omni-copy-url=, =omni-delete-line=, and so on.

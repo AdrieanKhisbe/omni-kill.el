@@ -27,6 +27,7 @@ Besides you can use the /dispatch/ functions. They take as argument the next key
 These are named =omni-ACTION=, and the char to thing association can be customized through the =omni-kill-thing-to-letter-alist= custom.
 
 For example calling =omni-kill= followed by the letter =e=, will kill the current =email= at point if any.
+(these function accept thing as symbol in non interactive use)
 
 * Installation
 

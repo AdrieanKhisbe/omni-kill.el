@@ -1,4 +1,4 @@
-;;; omni-kill.el --- Kill all the things  -*- lexical-binding: t ; no-byte-compile: t; -*-
+;;; omni-kill.el --- Kill all the things  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2017  Adrien Becchis
 
@@ -179,8 +179,8 @@ Association are stored in the `omni-kill-thing-to-letter-alist' variable" (capit
       (lambda ()
         (interactive)
         (omni-kill--do-thing-at-point (cdr (assoc command omni-kill-action-alist)) symb)))
-      ;; §todo: doc
-      ))
+    (put command-name 'function-documentation
+         (format "%s the %s at point." (capitalize command) symb))))
 
 (defun omni-kill--destroy-command (command symb)
   "Generate a dispath command for the given COMMAND."
